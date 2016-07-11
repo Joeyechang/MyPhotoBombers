@@ -16,7 +16,7 @@
 
 @interface THPhotosViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic) NSString *accessToken;
-@property (nonatomic) NSMutableArray *photos;
+@property (nonatomic) NSArray *photos;
 @property (nonatomic) BOOL loading;
 @end
 
@@ -70,18 +70,11 @@
 
 -(void)initPhotos{
 
-    NSString * photoUrlStr1 = @"http://upload-images.jianshu.io/upload_images/130752-b5feb662e2205b30.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr2 = @"http://upload-images.jianshu.io/upload_images/130752-56e5dd683bba0aa1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr3 = @"http://upload-images.jianshu.io/upload_images/130752-385e2f9f1f655c09.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr4 = @"http://upload-images.jianshu.io/upload_images/130752-18680819f06ab8a5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr5 = @"http://upload-images.jianshu.io/upload_images/130752-81a7712034d48374.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr6 = @"http://upload-images.jianshu.io/upload_images/130752-450c5668eaddfcf7.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr7 = @"http://upload-images.jianshu.io/upload_images/130752-b696ce4f5d2651fe.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr8 = @"http://upload-images.jianshu.io/upload_images/130752-8d77cbb35584da75.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr9 = @"http://upload-images.jianshu.io/upload_images/130752-c8b7a54209fc4297.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-    NSString * photoUrlStr10 = @"http://upload-images.jianshu.io/upload_images/130752-79102761996c6b4b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
-
-    self.photos = [NSMutableArray arrayWithObjects:photoUrlStr1,photoUrlStr2,photoUrlStr3,photoUrlStr4,photoUrlStr5,photoUrlStr6,photoUrlStr7,photoUrlStr8,photoUrlStr9,photoUrlStr10, nil];
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"images" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    self.photos = [responseDictionary valueForKeyPath:@"data"];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
@@ -90,7 +83,7 @@
 
 /**
  *  本来这个工程是从instagram下载图片展示
- *  因为过内网络被墙原因，这里不用这个获取图片信息了
+ *  因为国内网络被墙原因，这里不用这个获取图片信息了  http://joeychang.me/#access_token=3531989152.9d9ea24.e86e1fd0961749588eeb6005c5944dbc  changyou0730@126.com
  */
 /*
 - (void)refresh {
@@ -124,7 +117,7 @@
 */
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.photos count];
+    return [self.photos[0][@"images"] count];
 }
 
 
@@ -132,15 +125,19 @@
     THPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photo" forIndexPath:indexPath];
     
     cell.backgroundColor = [UIColor lightGrayColor];
-    cell.photo = self.photos[indexPath.row];
-    
+    if (indexPath.row) {
+       cell.photo = self.photos[0][@"images"][indexPath.row];
+    }else{
+       cell.photo = self.photos[0][@"images"][0];
+    }
+
     return cell;
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *photo = self.photos[indexPath.row];
+    NSDictionary *photo = self.photos[0][@"images"][indexPath.row];//self.photos[indexPath.row];
     THDetailViewController *viewController = [[THDetailViewController alloc] init];
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;

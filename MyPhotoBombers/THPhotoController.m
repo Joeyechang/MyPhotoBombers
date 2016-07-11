@@ -19,8 +19,12 @@
         return;
     }
     
-    NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", photo[@"id"], size];
-    NSURL *url = [[NSURL alloc] initWithString:photo[@"images"][size][@"url"]];
+//    NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", photo[@"id"], size];
+//    NSURL *url = [[NSURL alloc] initWithString:photo[@"images"][size][@"url"]];
+    
+    NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", photo[@"caption"][@"id"], size];
+    NSURL *url = [[NSURL alloc] initWithString:photo[@"url"]];
+    
 	[self downloadURL:url key:key completion:completion];
 }
 
