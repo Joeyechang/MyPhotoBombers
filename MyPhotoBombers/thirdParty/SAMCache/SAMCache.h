@@ -169,6 +169,6 @@
 @end
 
 
-#if TARGET_OS_IPHONE
-#import <SAMCache/SAMCache+Image.h>
-#endif
+//#if TARGET_OS_IPHONE
+//#import <SAMCache/SAMCache+Image.h>
+//#endif

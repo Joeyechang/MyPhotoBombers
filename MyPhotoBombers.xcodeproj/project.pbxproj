@@ -194,8 +194,8 @@
 				043551CA1D2E7195009CFEE7 /* ViewController.h */,
 				043551CB1D2E7195009CFEE7 /* THPresentDetailTransition.m */,
 				043551CC1D2E7195009CFEE7 /* THPresentDetailTransition.h */,
-				043551CD1D2E7195009CFEE7 /* THPhotosViewController.m */,
 				043551CE1D2E7195009CFEE7 /* THPhotosViewController.h */,
+				043551CD1D2E7195009CFEE7 /* THPhotosViewController.m */,
 				043551CF1D2E7195009CFEE7 /* THPhotoController.m */,
 				043551D01D2E7195009CFEE7 /* THPhotoController.h */,
 				043551D11D2E7195009CFEE7 /* THPhotoCell.m */,
@@ -586,6 +586,7 @@
 				043551861D2E6318009CFEE7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

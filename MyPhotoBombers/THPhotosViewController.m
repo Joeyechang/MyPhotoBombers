@@ -16,7 +16,7 @@
 
 @interface THPhotosViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic) NSString *accessToken;
-@property (nonatomic) NSArray *photos;
+@property (nonatomic) NSMutableArray *photos;
 @property (nonatomic) BOOL loading;
 @end
 
@@ -47,9 +47,10 @@
     [self.collectionView registerClass:[THPhotoCell class] forCellWithReuseIdentifier:@"photo"];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [self initPhotos];
     
     /*
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     self.accessToken = [userDefaults objectForKey:@"accessToken"];
     if (self.accessToken == nil) {
         [SimpleAuth authorize:@"instagram" options:@{@"scope": @[@"likes"]} completion:^(NSDictionary *responseObject, NSError *error) {
@@ -65,6 +66,27 @@
         [self refresh];
     }*/
 }
+
+
+-(void)initPhotos{
+
+    NSString * photoUrlStr1 = @"http://upload-images.jianshu.io/upload_images/130752-b5feb662e2205b30.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr2 = @"http://upload-images.jianshu.io/upload_images/130752-56e5dd683bba0aa1.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr3 = @"http://upload-images.jianshu.io/upload_images/130752-385e2f9f1f655c09.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr4 = @"http://upload-images.jianshu.io/upload_images/130752-18680819f06ab8a5.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr5 = @"http://upload-images.jianshu.io/upload_images/130752-81a7712034d48374.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr6 = @"http://upload-images.jianshu.io/upload_images/130752-450c5668eaddfcf7.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr7 = @"http://upload-images.jianshu.io/upload_images/130752-b696ce4f5d2651fe.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr8 = @"http://upload-images.jianshu.io/upload_images/130752-8d77cbb35584da75.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr9 = @"http://upload-images.jianshu.io/upload_images/130752-c8b7a54209fc4297.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+    NSString * photoUrlStr10 = @"http://upload-images.jianshu.io/upload_images/130752-79102761996c6b4b.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240";
+
+    self.photos = [NSMutableArray arrayWithObjects:photoUrlStr1,photoUrlStr2,photoUrlStr3,photoUrlStr4,photoUrlStr5,photoUrlStr6,photoUrlStr7,photoUrlStr8,photoUrlStr9,photoUrlStr10, nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+}
+
 
 /**
  *  本来这个工程是从instagram下载图片展示

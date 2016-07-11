@@ -7,8 +7,10 @@
 //
 
 #import "THPhotoController.h"
+#import "SAMCache.h"
+#import "SAMCache+Image.h"
 
-#import <SAMCache/SAMCache.h>
+//#import <SAMCache/SAMCache.h>
 
 @implementation THPhotoController
 

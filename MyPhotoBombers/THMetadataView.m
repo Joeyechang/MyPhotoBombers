@@ -8,8 +8,8 @@
 
 #import "THMetadataView.h"
 #import "THPhotoController.h"
-
-#import <SAMCategories/NSDate+SAMAdditions.h>
+#import "NSDate+SAMAdditions.h"
+//#import <SAMCategories/NSDate+SAMAdditions.h>
 
 @interface THMetadataView ()
 @property (nonatomic) UIImageView *avatarImageView;
