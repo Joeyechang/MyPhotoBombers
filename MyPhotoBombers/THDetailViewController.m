@@ -28,6 +28,7 @@
 	self.metadataView.alpha = 0.0f;
 	self.metadataView.photo = self.photo;
 	[self.view addSubview:self.metadataView];
+    self.metadataView.backgroundColor = [UIColor orangeColor];
 
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, -320.0, 320.0f, 320.0f)];
 	self.imageView.backgroundColor = [UIColor colorWithWhite:0.95f alpha:1.0f];

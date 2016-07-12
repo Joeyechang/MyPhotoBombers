@@ -39,6 +39,7 @@
 		043551DE1D2E7195009CFEE7 /* THMetadataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043551D31D2E7195009CFEE7 /* THMetadataView.m */; };
 		043551DF1D2E7195009CFEE7 /* THDismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 043551D51D2E7195009CFEE7 /* THDismissDetailTransition.m */; };
 		043551E01D2E7195009CFEE7 /* THDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043551D71D2E7195009CFEE7 /* THDetailViewController.m */; };
+		045544B11D347F620045CCDA /* Images.m in Sources */ = {isa = PBXBuildFile; fileRef = 045544B01D347F620045CCDA /* Images.m */; };
 		049014C41D33AD8400DAF1A0 /* images.json in Resources */ = {isa = PBXBuildFile; fileRef = 049014C31D33AD8300DAF1A0 /* images.json */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,8 @@
 		043551D61D2E7195009CFEE7 /* THDismissDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDismissDetailTransition.h; sourceTree = "<group>"; };
 		043551D71D2E7195009CFEE7 /* THDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDetailViewController.m; sourceTree = "<group>"; };
 		043551D81D2E7195009CFEE7 /* THDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDetailViewController.h; sourceTree = "<group>"; };
+		045544AF1D347F620045CCDA /* Images.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Images.h; sourceTree = "<group>"; };
+		045544B01D347F620045CCDA /* Images.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Images.m; sourceTree = "<group>"; };
 		049014C31D33AD8300DAF1A0 /* images.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = images.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +142,8 @@
 		0435516F1D2E6318009CFEE7 /* MyPhotoBombers */ = {
 			isa = PBXGroup;
 			children = (
+				045544AF1D347F620045CCDA /* Images.h */,
+				045544B01D347F620045CCDA /* Images.m */,
 				049014C31D33AD8300DAF1A0 /* images.json */,
 				043551871D2E712C009CFEE7 /* thirdParty */,
 				043551CB1D2E7195009CFEE7 /* THPresentDetailTransition.m */,
@@ -312,6 +317,7 @@
 			files = (
 				043551C41D2E712C009CFEE7 /* UIDevice+SAMAdditions.m in Sources */,
 				043551BB1D2E712C009CFEE7 /* NSNumber+SAMAdditions.m in Sources */,
+				045544B11D347F620045CCDA /* Images.m in Sources */,
 				043551C71D2E712C009CFEE7 /* UIView+SAMAdditions.m in Sources */,
 				043551BC1D2E712C009CFEE7 /* NSObject+SAMAdditions.m in Sources */,
 				043551BF1D2E712C009CFEE7 /* NSUserDefaults+SAMAdditions.m in Sources */,

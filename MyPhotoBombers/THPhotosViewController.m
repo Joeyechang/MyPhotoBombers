@@ -11,12 +11,11 @@
 #import "THDetailViewController.h"
 #import "THPresentDetailTransition.h"
 #import "THDismissDetailTransition.h"
-
-//#import <SimpleAuth/SimpleAuth.h>
+#import "Images.h"
 
 @interface THPhotosViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic) NSString *accessToken;
-@property (nonatomic) NSArray *photos;
+@property (nonatomic) NSMutableArray *photos;
 @property (nonatomic) BOOL loading;
 @end
 
@@ -46,7 +45,7 @@
     
     [self.collectionView registerClass:[THPhotoCell class] forCellWithReuseIdentifier:@"photo"];
     self.collectionView.backgroundColor = [UIColor whiteColor];
-    
+    self.photos = [[NSMutableArray alloc] init];
     [self initPhotos];
     
     /*
@@ -74,7 +73,14 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"images" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-    self.photos = [responseDictionary valueForKeyPath:@"data"];
+    NSArray * dataArr = [responseDictionary valueForKeyPath:@"data"];
+    NSArray * imagesArr = dataArr[0][@"images"];
+    
+    [imagesArr enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL * stop) {
+        NSDictionary * imgDic = (NSDictionary *)obj;
+        //Images *img = [Images initImageWithDic:imgDic];
+        [self.photos addObject:imgDic];
+    }];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
@@ -83,7 +89,7 @@
 
 /**
  *  本来这个工程是从instagram下载图片展示
- *  因为国内网络被墙原因，这里不用这个获取图片信息了  http://joeychang.me/#access_token=3531989152.9d9ea24.e86e1fd0961749588eeb6005c5944dbc  changyou0730@126.com
+ *  因为国内网络被墙原因，这里不用这个获取图片信息了
  */
 /*
 - (void)refresh {
@@ -117,19 +123,16 @@
 */
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.photos[0][@"images"] count];
+    return [self.photos count];
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     THPhotoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"photo" forIndexPath:indexPath];
-    
     cell.backgroundColor = [UIColor lightGrayColor];
-    if (indexPath.row) {
-       cell.photo = self.photos[0][@"images"][indexPath.row];
-    }else{
-       cell.photo = self.photos[0][@"images"][0];
-    }
+    
+    NSInteger  index = indexPath.row;
+    cell.photo = self.photos[index];
 
     return cell;
 }
@@ -137,7 +140,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *photo = self.photos[0][@"images"][indexPath.row];//self.photos[indexPath.row];
+//    NSDictionary *photo = self.photos[0][@"images"][indexPath.row];
+    NSDictionary *photo = self.photos[indexPath.row];
     THDetailViewController *viewController = [[THDetailViewController alloc] init];
     viewController.modalPresentationStyle = UIModalPresentationCustom;
     viewController.transitioningDelegate = self;

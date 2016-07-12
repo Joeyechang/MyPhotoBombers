@@ -10,19 +10,13 @@
 #import "SAMCache.h"
 #import "SAMCache+Image.h"
 
-//#import <SAMCache/SAMCache.h>
-
 @implementation THPhotoController
 
 + (void)imageForPhoto:(NSDictionary *)photo size:(NSString *)size completion:(void(^)(UIImage *image))completion {
     if (photo == nil || size == nil || completion == nil) {
         return;
     }
-    
-//    NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", photo[@"id"], size];
-//    NSURL *url = [[NSURL alloc] initWithString:photo[@"images"][size][@"url"]];
-    
-    NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", photo[@"caption"][@"id"], size];
+    NSString *key = [[NSString alloc] initWithFormat:@"%@-%@", photo[@"id"], size];
     NSURL *url = [[NSURL alloc] initWithString:photo[@"url"]];
     
 	[self downloadURL:url key:key completion:completion];
